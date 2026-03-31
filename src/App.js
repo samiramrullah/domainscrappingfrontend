@@ -81,7 +81,7 @@ const App = () => {
               </thead>
 
               <tbody>
-                {data.results.map((item, index) => (
+                {data?.results?.map((item, index) => (
                   <tr
                     key={index}
                     className="border-t hover:bg-gray-50 transition"
