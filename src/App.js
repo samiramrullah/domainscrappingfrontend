@@ -72,7 +72,7 @@ const App = () => {
 
       {/* Header */}
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
-        🚀 Domain Scraper
+         Domain Scraper
       </h1>
 
       {/* Card */}
