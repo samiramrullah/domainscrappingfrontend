@@ -160,14 +160,14 @@ const App = () => {
               <thead className="bg-gray-200">
                 <tr>
                   <th className="p-3 text-left">Domain</th>
-                  <th className="p-3 text-left">Redirect</th>
+                  <th className="p-3 text-right">Redirect</th>
                 </tr>
               </thead>
 
               <tbody>
                 {data.results?.map((item, i) => (
                   <tr key={i} className="border-t hover:bg-gray-50">
-                    <td className="p-3">
+                    <td className="p-2">
                       <a
                         href={`http://${item.domain}`}
                         target="_blank"
@@ -178,7 +178,7 @@ const App = () => {
                       </a>
                     </td>
 
-                    <td className="p-3">
+                    <td className="p-2 text-right">
                       <a
                         href={item.finalUrl || `http://${item.domain}`}
                         target="_blank"
