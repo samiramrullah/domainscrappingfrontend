@@ -74,11 +74,10 @@ const App = () => {
           <button
             onClick={handleScrape}
             disabled={loading}
-            className={`px-5 py-2 rounded-lg transition text-white ${
-              loading
+            className={`px-5 py-2 rounded-lg transition text-white ${loading
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-blue-600 hover:bg-blue-700"
-            }`}
+              }`}
           >
             {loading ? "Processing..." : "Scrape"}
           </button>
@@ -132,14 +131,14 @@ const App = () => {
                     <td className="p-3 font-medium">{item.domain}</td>
 
                     <td className="p-3 break-all">
-                      {item.finalUrl ? (
+                      {item.finalUrl || item.domain ? (
                         <a
-                          href={item.finalUrl}
+                          href={item.finalUrl || `http://${item.domain}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-600 hover:underline"
                         >
-                          {item.finalUrl}
+                          {item.finalUrl || `http://${item.domain}`}
                         </a>
                       ) : (
                         <span className="text-gray-400">-</span>
