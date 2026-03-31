@@ -12,7 +12,7 @@ const App = () => {
       setLoading(true);
       setData(null);
 
-      const res = await fetch("http://localhost:5001/scrape", {
+      const res = await fetch("https://domainscrapping.onrender.com/scrape", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
