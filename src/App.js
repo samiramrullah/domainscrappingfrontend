@@ -1,9 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const messages = [
+  "🔍 Fetching domains...",
+  "🧠 Analyzing page structure...",
+  "📡 Extracting domain list...",
+  "⚡ Filtering valid domains...",
+  "🛡️ Removing duplicates & junk...",
+  "🚀 Almost done... optimizing accuracy...",
+];
 
 const App = () => {
   const [url, setUrl] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [messageIndex, setMessageIndex] = useState(0);
+
+  // 🔄 Rotate messages
+  useEffect(() => {
+    if (!loading) return;
+
+    const interval = setInterval(() => {
+      setMessageIndex((prev) => (prev + 1) % messages.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const handleScrape = async () => {
     if (!url) return alert("Please enter URL");
@@ -11,6 +32,7 @@ const App = () => {
     try {
       setLoading(true);
       setData(null);
+      setMessageIndex(0);
 
       const res = await fetch("https://domainscrapping.onrender.com/scrape", {
         method: "POST",
@@ -45,22 +67,43 @@ const App = () => {
             placeholder="Enter website URL..."
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            disabled={loading}
+            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
           />
+
           <button
             onClick={handleScrape}
-            className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+            disabled={loading}
+            className={`px-5 py-2 rounded-lg transition text-white ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
-            Scrape
+            {loading ? "Processing..." : "Scrape"}
           </button>
         </div>
       </div>
 
-      {/* Loading */}
+      {/* 🔥 ADVANCED LOADER */}
       {loading && (
-        <p className="mt-6 text-blue-600 font-medium animate-pulse">
-          Scraping domains... ⏳
-        </p>
+        <div className="mt-8 flex flex-col items-center gap-4">
+
+          {/* Spinner */}
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+
+          {/* Dynamic message */}
+          <p className="text-blue-600 font-medium text-lg transition-all duration-500">
+            {messages[messageIndex]}
+          </p>
+
+          {/* Progress dots */}
+          <div className="flex gap-1">
+            <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></span>
+            <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce delay-150"></span>
+            <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce delay-300"></span>
+          </div>
+        </div>
       )}
 
       {/* Results */}
