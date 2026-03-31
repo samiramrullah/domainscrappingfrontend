@@ -43,7 +43,7 @@ const App = () => {
       setMessageIndex(0);
 
       const res = await fetch(
-        "https://domainscrapping.onrender.com/scrape",
+        "https://effectively-ambient-flashing-enabled.trycloudflare.com/scrape",
         {
           method: "POST",
           headers: {
