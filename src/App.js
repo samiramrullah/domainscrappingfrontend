@@ -45,7 +45,7 @@ const App = () => {
       setMessageIndex(0);
 
       const res = await fetch(
-        "https://mission-locations-officials-lone.trycloudflare.com/scrape",
+        "https://ownership-testimonials-unto-brilliant.trycloudflare.com/scrape",
         {
           method: "POST",
           headers: {
